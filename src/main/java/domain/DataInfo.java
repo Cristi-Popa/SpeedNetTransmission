@@ -2,9 +2,15 @@ package domain;
 
 import config.Prop;
 import domain.time.ExecutionTime;
+import exceptions.AlgorithmException;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.Random;
 
 public class DataInfo extends ExecutionTime {
     private static final DecimalFormat df = new DecimalFormat("0.00");
@@ -24,7 +30,10 @@ public class DataInfo extends ExecutionTime {
 
     private String destinationFolder = null;
 
+    private File originalFile;
+
     public void setFile(File file) {
+        originalFile = file;
         this.originalFileName = file.getName();
         this.originalPath = file.getParent();
 
@@ -109,5 +118,48 @@ public class DataInfo extends ExecutionTime {
 
     public void setDestinationFolder(String destinationFolder) {
         this.destinationFolder = destinationFolder;
+    }
+
+    public File getOriginalFile() {
+        return originalFile;
+    }
+
+    public String getProbeFile() {
+        return originalPath + "\\..\\probe\\" + originalFileName + Prop.PROBE_EXTENSION;
+    }
+    public String getProbePath() {
+        return originalPath + "\\..\\probe";
+    }
+
+    public File createProbeFile(final int noBlocks, final int blockSize) {
+        File newFile = null;
+        File original = getOriginalFile();
+        try (RandomAccessFile raf = new RandomAccessFile(original, "r")) {
+            if ((original.length() / noBlocks) - blockSize <= 0) {
+                throw new AlgorithmException("Dimensiunea blocurilor si numarul lor depaseste dimensiunea fisierului original");
+            }
+            Random rdn = new Random();
+            byte[] dest = new byte[blockSize];
+            int limit = (int) ((original.length() / noBlocks) - blockSize);
+
+            String fullPath = getProbeFile();
+            Files.createDirectories(Paths.get(getProbePath()));
+            newFile = new File(fullPath);
+            newFile.createNewFile();
+            FileOutputStream fw = new FileOutputStream(newFile);
+
+            for (int i = 0; i < noBlocks; i++) {
+                int randomBlockPosition = i * limit + rdn.nextInt(limit);
+                raf.seek(randomBlockPosition);
+                int bytesRead = raf.read(dest, 0, blockSize);
+
+                fw.write(dest, 0, bytesRead);
+                fw.flush();
+            }
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newFile;
     }
 }

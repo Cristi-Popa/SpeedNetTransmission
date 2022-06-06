@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,10 +16,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<SplitPane dividerPositions="0.2505567928730512, 0.7483296213808464" focusTraversable="true" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+<SplitPane dividerPositions="0.2505567928730512, 0.7483296213808464" focusTraversable="true" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <items>
-      <SplitPane dividerPositions="0.5" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="230.0">
+      <SplitPane dividerPositions="0.45652173913043476" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="230.0">
          <items>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="230.0" SplitPane.resizableWithParent="false">
                <children>
@@ -94,27 +94,27 @@
          <children>
             <TableView fx:id="TABLE_VIEW" layoutY="50.0" prefHeight="576.0" prefWidth="443.0" AnchorPane.bottomAnchor="-31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-13.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Algoritm" >
+                  <TableColumn prefWidth="75.0" text="Algoritm">
                      <cellValueFactory>
                         <PropertyValueFactory property="algorithm" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn prefWidth="75.0" text="Rata" >
+                  <TableColumn prefWidth="75.0" text="Rata">
                      <cellValueFactory>
                         <PropertyValueFactory property="rata" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn prefWidth="90.0" text="Dimensiune C" >
+                  <TableColumn prefWidth="90.0" text="Dimensiune C">
                      <cellValueFactory>
                         <PropertyValueFactory property="dimensiune" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="50.0" prefWidth="75.0" text="Timp C" >
+                  <TableColumn minWidth="50.0" prefWidth="75.0" text="Timp C">
                      <cellValueFactory>
                         <PropertyValueFactory property="timpCompression" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn minWidth="50.0" prefWidth="75.0" text="Timp D" >
+                  <TableColumn minWidth="50.0" prefWidth="75.0" text="Timp D">
                      <cellValueFactory>
                         <PropertyValueFactory property="timpDecompression" />
                      </cellValueFactory>
@@ -123,9 +123,9 @@
             </TableView>
          </children>
       </AnchorPane>
-      <SplitPane dividerPositions="0.5" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="230.0">
+      <SplitPane dividerPositions="0.45652173913043476" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="230.0">
         <items>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="230.0" SplitPane.resizableWithParent="false">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="230.0" SplitPane.resizableWithParent="false">
                <children>
                   <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Algorithms" textAlignment="CENTER" textFill="$x2" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <padding>
@@ -142,7 +142,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <CheckBox fx:id="RLE_CHECKBOX" mnemonicParsing="false" onAction="#checkRLE" text="RLE" GridPane.valignment="CENTER">
@@ -170,11 +170,25 @@
                               <Insets left="20.0" />
                            </padding>
                         </CheckBox>
-                        <Button fx:id="ALGORITHM_TEST_BUTTON" maxWidth="-Infinity" minHeight="30.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#testCompressDecompressTime" prefWidth="100.0" text="Test C-D time" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets top="20.0" />
-                           </GridPane.margin>
-                        </Button>
+                        <Button fx:id="ALGORITHM_TEST_BUTTON" maxWidth="-Infinity" minHeight="30.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#testCompressDecompressTime" prefWidth="100.0" text="Test C-D time" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+                  <GridPane layoutX="15.0" layoutY="246.0" prefHeight="90.0" prefWidth="200.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="60.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="NO blocks" />
+                        <Label text="Block size " GridPane.rowIndex="1" />
+                        <TextField fx:id="NO_BLOCKS_FIELD" GridPane.columnIndex="1" />
+                        <TextField fx:id="BLOCK_SIZE_FIELD" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="PROBE_BUTTON" maxWidth="-Infinity" minHeight="30.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#probeAlgs" prefHeight="30.0" prefWidth="80.0" text="Probe" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

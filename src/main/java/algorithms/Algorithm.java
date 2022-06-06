@@ -11,6 +11,7 @@ public interface Algorithm {
     public DataInfo getDataInfo();
 
     public DataInfo exec () throws AlgorithmException;
+    public DataInfo probe (File probeFile) throws AlgorithmException;
     public void reset () ;
 
     public DataInfo compress() throws AlgorithmException;

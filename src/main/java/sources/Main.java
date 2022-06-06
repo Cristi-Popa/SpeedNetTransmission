@@ -25,7 +25,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("FXML Welcome");
+        stage.setTitle("Speed Net Transmission");
         stage.setScene(scene);
         stage.show();
     }

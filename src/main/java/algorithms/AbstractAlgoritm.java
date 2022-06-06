@@ -8,6 +8,7 @@ import exceptions.ConsumerException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Random;
 
 public abstract class AbstractAlgoritm implements Algorithm {
     protected DataInfo dataInfo = new DataInfo();
@@ -20,14 +21,18 @@ public abstract class AbstractAlgoritm implements Algorithm {
         dataInfo.setFile(file);
         return this;
     }
+
+
     @Override
     public AbstractAlgoritm setDestinationFolder(String destinationFolder) {
         dataInfo.setDestinationFolder(destinationFolder);
         return this;
     }
+
     public void reset() {
         dataInfo = new DataInfo();
     }
+
     protected void reading(ConsumerException<char[], Integer, AlgorithmException> exec) throws AlgorithmException {
         char[] buffer = new char[Constants.BUFFER_READING_SIZE];
 
@@ -36,11 +41,11 @@ public abstract class AbstractAlgoritm implements Algorithm {
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
             int size;
-            while (( size =br.read(buffer)) != -1) {
-                exec.accept(buffer,size);
+            while ((size = br.read(buffer)) != -1) {
+                exec.accept(buffer, size);
                 buffer = new char[Constants.BUFFER_READING_SIZE];
             }
-            exec.accept(new char[1],0);
+            exec.accept(new char[1], 0);
             cleanFirstTime = true; //prepare for the other reading
 
         } catch (FileNotFoundException e) {
@@ -74,7 +79,7 @@ public abstract class AbstractAlgoritm implements Algorithm {
             if (file.exists() && !cleanFirstTime)
                 fw = new FileOutputStream(file, true);
             else
-                fw =new FileOutputStream(file);
+                fw = new FileOutputStream(file);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fw));
             bw.write(exec);
             bw.flush();
@@ -100,9 +105,19 @@ public abstract class AbstractAlgoritm implements Algorithm {
     }
 
     @Override
+    public DataInfo probe(File probeFile) throws AlgorithmException {
+        File file = dataInfo.getOriginalFile();
+        setFileName(probeFile);
+        compress();
+        setFileName(file);
+        return dataInfo;
+    }
+
+    @Override
     public DataInfo getDataInfo() {
         return dataInfo;
     }
+
     public void setDataInfo(DataInfo dataInfo) {
         this.dataInfo = dataInfo;
     }

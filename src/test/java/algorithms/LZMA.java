@@ -20,6 +20,6 @@ public class LZMA {
     @Test
     @DisplayName("RLE: test compress binary file")
     void binaryTest() throws AlgorithmException, IOException {
-        Utils.testFileMismach(alg, new File(Constant.TEST_PATH + INPUT_PATH + "vlc-3.0.17.4-win64.exe"));
+        Utils.testFileMismach(alg, new File(Constant.TEST_PATH + INPUT_PATH + "clasicDEFLATE.txt"));
     }
 }

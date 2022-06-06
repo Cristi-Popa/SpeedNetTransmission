@@ -7,6 +7,8 @@ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 
 public class BZIP2 extends ApacheAlgorithms {
+
+
     @Override
     public DataInfo compress() throws AlgorithmException {
         dataInfo.setCompressionStart();
